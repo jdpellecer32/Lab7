@@ -1,4 +1,3 @@
-
 #include <SPI.h>
 #include <SD.h>
 
@@ -26,25 +25,93 @@ void setup()
     return;
   }
   Serial.println("initialization done.");
+  Serial.println("Ingrese el numero 1 para escoger la opcion de Gombat");
+  Serial.println("Ingrese el numero 2 para escoger la opcion de Luigi");
+  Serial.println("Ingrese el numero 3 para escoger la opcion de MasterChief");
 
-  // re-open the file for reading:
-  myFile = SD.open("GOMBAT.txt");
-  if (myFile) {
-    Serial.println("GOMBAT.txt:");
-
-    // read from the file until there's nothing else in it:
-    while (myFile.available()) {
-      Serial.write(myFile.read());
-    }
-    // close the file:
-    myFile.close();
-  } else {
-    // if the file didn't open, print an error:
-    Serial.println("error opening test.txt");
-  }
 }
+
+char mostrar = 0;
+int archivo, opcion;
 
 void loop()
 {
-  // nothing happens after setup
+  if (Serial.available() > 0) {
+    mostrar = 1;
+    archivo = Serial.read();
+    if (archivo == '1') {
+      Serial.println("Escogio el archivo Gombat");
+      opcion=1;
+    } else if (archivo == '2') {
+      Serial.println("Escogio el archivo Luigi");
+      opcion=2;
+    } else if (archivo == '3') {
+      Serial.println("Escogio el archivo MasterChief");
+      opcion=3;
+    } else {
+      Serial.println("No ingreso ninguna opcion correcta");
+      //mostrar = 0;
+     
+    }
+
+  }
+  if (mostrar == 1) {
+    switch (opcion) {
+      case 1:
+        myFile = SD.open("GOMBAT.txt");
+        if (myFile) {
+          Serial.println("GOMBAT.txt:");
+
+          // read from the file until there's nothing else in it:
+          while (myFile.available()) {
+            Serial.write(myFile.read());
+          }
+          // close the file:
+          myFile.close();
+        } else {
+          // if the file didn't open, print an error:
+          Serial.println("error opening test.txt");
+        }
+        mostrar = 0;
+        break;
+      case 2:
+        myFile = SD.open("LUIGI.txt");
+        if (myFile) {
+          Serial.println("LUIGI.txt:");
+
+          // read from the file until there's nothing else in it:
+          while (myFile.available()) {
+            Serial.write(myFile.read());
+          }
+          // close the file:
+          myFile.close();
+        } else {
+          // if the file didn't open, print an error:
+          Serial.println("error opening test.txt");
+        }
+        mostrar = 0;
+        break;
+      case 3:
+        myFile = SD.open("MASTERCHIEF.txt");
+        if (myFile) {
+          Serial.println("MASTERCHIEF.txt:");
+
+          // read from the file until there's nothing else in it:
+          while (myFile.available()) {
+            Serial.write(myFile.read());
+          }
+          // close the file:
+          myFile.close();
+        } else {
+          // if the file didn't open, print an error:
+          Serial.println("error opening test.txt");
+        }
+        mostrar = 0;
+        break;
+
+
+    }
+
+  }
+
 }
